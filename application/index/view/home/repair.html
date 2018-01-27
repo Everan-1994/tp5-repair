@@ -1,0 +1,119 @@
+{extend name="layouts/layout" /}
+
+{block name="style_s"}
+<style>
+    .page li {
+        float: left;
+        padding: 5px 10px;
+        border: 1px solid #00a65a;
+        border-radius: 3px;
+        margin-left: 10px;
+    }
+    .active {
+        background-color: #009587;
+        color: #fff;
+    }
+    .disabled {
+        color: #e0e0e0;
+    }
+</style>
+{/block}
+
+{block name="body"}
+<div class="layui-container fly-marginTop fly-user-main">
+    <ul class="layui-nav layui-nav-tree layui-inline" lay-filter="user">
+        <li class="layui-nav-item">
+            <a href="home.html">
+                <i class="layui-icon">&#xe609;</i>
+                我的主页
+            </a>
+        </li>
+        <li class="layui-nav-item">
+            <a href="index.html">
+                <i class="layui-icon">&#xe612;</i>
+                用户中心
+            </a>
+        </li>
+        <li class="layui-nav-item">
+            <a href="{:url('home/index')}">
+                <i class="layui-icon">&#xe620;</i>
+                我要报修
+            </a>
+        </li>
+        <li class="layui-nav-item layui-this">
+            <a href="{:url('home/myRepair')}">
+                <i class="layui-icon">&#xe611;</i>
+                我的报修
+            </a>
+        </li>
+    </ul>
+
+    <div class="site-tree-mobile layui-hide">
+        <i class="layui-icon">&#xe602;</i>
+    </div>
+    <div class="site-mobile-shade"></div>
+
+    <div class="site-tree-mobile layui-hide">
+        <i class="layui-icon">&#xe602;</i>
+    </div>
+    <div class="site-mobile-shade"></div>
+
+
+    <div class="fly-panel fly-panel-user" pad20>
+        <div class="layui-tab layui-tab-brief" lay-filter="user">
+            <ul class="layui-tab-title" id="LAY_mine">
+                <li class="layui-this" lay-id="info">我的报修</li>
+            </ul>
+            <div class="layui-tab-content" style="padding: 20px 0;">
+                <div class="layui-form layui-form-pane layui-tab-item layui-show">
+                    <div class="fly-panel">
+                        <ul class="fly-list">
+                            {volist name="list" id="vo"}
+                            <li style="height: 20px;">
+                                <h2>
+                                    <a>{$vo.id}、</a>
+                                    <a>『{$vo.order_number}』</a>
+                                    <a class="layui-badge">
+                                        {switch name="vo.r_type"}
+                                            {case value="1"}五金家具{/case}
+                                            {case value="2"}水系统{/case}
+                                            {case value="3"}电系统{/case}
+                                            {default /}其他维修
+                                        {/switch}
+                                    </a>
+                                    <a class="layui-badge">{$vo.r_area}</a>
+                                    <a href="">{$vo.r_content}</a>
+                                    <a class="layui-badge">
+                                        {switch name="vo.r_status"}
+                                            {case value="1"}待维修{/case}
+                                            {case value="2"}维修中{/case}
+                                            {default /}已完成
+                                        {/switch}
+                                    </a>
+                                </h2>
+                            </li>
+                            {/volist}
+                        </ul>
+                        <div class="page">
+                            {$list->render()}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{/block}
+
+{block name="js_s"}
+<script>
+    $(function () {
+        layui.use(['form'], function () {
+            var form = layui.form;
+            form.render();
+        })
+    })
+</script>
+{/block}

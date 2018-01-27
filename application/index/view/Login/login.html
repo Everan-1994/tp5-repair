@@ -1,0 +1,58 @@
+{extend name="layouts/layout" /}
+
+{block name="style_s"}
+<style>
+    .yzm {
+        border: 1px solid #2b2626;
+        border-radius: 5px;
+        max-width: 150px;
+        margin-top: -8px;
+    }
+</style>
+{/block}
+
+{block name="body"}
+<div class="fly-panel fly-panel-user" pad20>
+    <div class="layui-tab layui-tab-brief" lay-filter="user">
+        <ul class="layui-tab-title">
+            <li class="layui-this">登入</li>
+            <li><a href="{:url('login/register')}">注册</a></li>
+        </ul>
+        <div class="layui-form layui-tab-content" id="LAY_ucm" style="padding: 20px 0;">
+            <div class="layui-tab-item layui-show">
+                <div class="layui-form layui-form-pane">
+                    <form method="post" action="{:url('login/login_do')}">
+                        <div class="layui-form-item">
+                            <label for="L_username" class="layui-form-label">账号</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="L_username" name="username"
+                                       autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label for="L_password" class="layui-form-label">密码</label>
+                            <div class="layui-input-inline">
+                                <input type="password" id="L_password" name="password"
+                                       autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label for="L_vercode" class="layui-form-label">验证码</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="L_vercode" name="vercode"
+                                       placeholder="请输入验证码" autocomplete="off" class="layui-input">
+                            </div>
+                            <div class="layui-form-mid">
+                                <img src="{:captcha_src()}" alt="验证码" onclick='this.src="{:captcha_src()}?" + Math.random()' class="yzm">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <button class="layui-btn" type="submit">立即登录</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}
